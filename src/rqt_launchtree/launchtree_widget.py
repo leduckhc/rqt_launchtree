@@ -9,12 +9,13 @@ import rospy
 import rospkg
 import roslaunch
 
-from rqt_launchtree.launchtree_loader import LaunchtreeLoader
-from rqt_launchtree.launchtree_config import LaunchtreeConfig, LaunchtreeArg, LaunchtreeRemap, LaunchtreeParam, LaunchtreeRosparam
+from .launchtree_loader import LaunchtreeLoader
+from .launchtree_config import LaunchtreeConfig, LaunchtreeArg, LaunchtreeRemap, LaunchtreeParam, LaunchtreeRosparam
 
-from python_qt_binding import loadUi
-from python_qt_binding.QtCore import Qt, Signal
-from python_qt_binding.QtGui import QFileDialog, QWidget, QIcon, QTreeWidgetItem, QColor
+from PyQt5.uic import loadUi
+from PyQt5.QtCore import Qt, Signal
+from PyQt5.QtWidgets import QFileDialog, QWidget, QTreeWidgetItem
+from PyQt5.QtGui import QIcon, QColor
 
 class LaunchtreeEntryItem(QTreeWidgetItem):
 	_type_order = [dict, roslaunch.core.Node, LaunchtreeRosparam, roslaunch.core.Param, LaunchtreeRemap, LaunchtreeArg, object]
@@ -321,7 +322,9 @@ class LaunchtreeWidget(QWidget):
 
 			show &= search_text in entry.text(0)
 			if show:
-				entry.setBackgroundColor(0, self._highlight_color if highlight else self._neutral_color)
+				# color = self._highlight_color if highlight else self._neutral_color
+				# entry.setStyleSheet("background-color:%s" % color)
+				entry.setBackground(0, self._highlight_color if highlight else self._neutral_color)
 
 			if entry.childCount() > 0:
 				not_empty = any(map(filter_launch_entry, map(entry.child, range(entry.childCount()))))

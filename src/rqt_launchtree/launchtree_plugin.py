@@ -2,10 +2,10 @@
 import rospy
 from rqt_gui_py.plugin import Plugin
 
-from python_qt_binding.QtCore import Qt
-from python_qt_binding.QtGui import QInputDialog
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QInputDialog
 
-from rqt_launchtree.launchtree_widget import LaunchtreeWidget
+from .launchtree_widget import LaunchtreeWidget
 
 
 class LaunchtreePlugin(Plugin):
